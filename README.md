@@ -25,7 +25,7 @@ builder.RegisterModule<MetricsModule>();
 ### Incrementing a counter
 Inject:
 ```csharp
-  private readonly IIncrementMetricsCounters _metricsCounterIncrementer;
+private readonly IIncrementMetricsCounters _metricsCounterIncrementer;
 ```
 
 Create a model:
@@ -48,32 +48,31 @@ public class UserClickedSomethingMetric : IMetricsModel
 
 Increment the counter
 ```csharp
-  _metricsCounterIncrementer.Increment(new UserClickedFindMetric());
+_metricsCounterIncrementer.Increment(new UserClickedFindMetric());
 ``` 
 
 ### Adding a metric endpoint for prometheus to scrape
 Add a controller:
 
 ```csharp
-    [Route("metrics")]
-    public class MetricsController : Controller
+[Route("metrics")]
+public class MetricsController : Controller
+{
+    private readonly IProvideMetricSnapshots _metricsSnapshotProvider;
+
+    public MetricsController(IProvideMetricSnapshots metricsSnapshotProvider)
     {
-        private readonly IProvideMetricSnapshots _metricsSnapshotProvider;
-
-        public MetricsController(IProvideMetricSnapshots metricsSnapshotProvider)
-        {
-            _metricsSnapshotProvider = metricsSnapshotProvider;
-        }
-
-        [HttpGet]
-        public ActionResult Metrics()
-        {
-            var snapshot = _metricsSnapshotProvider.Provide();
-
-            return new ContentResult() {Content = snapshot, ContentEncoding = Encoding.UTF8, ContentType = "text/html"};
-        }
+        _metricsSnapshotProvider = metricsSnapshotProvider;
     }
 
+    [HttpGet]
+    public ActionResult Metrics()
+    {
+        var snapshot = _metricsSnapshotProvider.Provide();
+
+        return new ContentResult() {Content = snapshot, ContentEncoding = Encoding.UTF8, ContentType = "text/html"};
+    }
+}
 ```
 
 If you use an ApiController

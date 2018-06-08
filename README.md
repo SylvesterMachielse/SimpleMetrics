@@ -22,6 +22,19 @@ In your autofac dependency registration
 builder.RegisterModule<MetricsModule>();
 ```
 
+If you have a .net application you might get an error:
+
+> Could not load file or assembly 'System.Runtime, Version=4.0.0.0, 
+
+Resolve this by adding/editing your web.config
+
+```xml
+<dependentAssembly>
+    <assemblyIdentity name="System.Runtime" publicKeyToken="b03f5f7f11d50a3a" culture="neutral" />
+    <bindingRedirect oldVersion="0.0.0.0-4.1.2.0" newVersion="4.1.2.0" />
+</dependentAssembly>
+```
+
 ### Incrementing a counter
 Inject:
 ```csharp

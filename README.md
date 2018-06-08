@@ -5,8 +5,8 @@
 * Ensure best practices are used
 
 ## What is it
-This is a wrapper around [App.Metrics](https://www.app-metrics.io) that  is more suitable for our organisation. 
-* uses Autofac for dependcy injection
+This is a wrapper around [App.Metrics](https://www.app-metrics.io) that  is more suitable for our organisation: 
+* Autofac for dependency injection
 * can act as an extra layer in naming/managing metrics in your codebase
 * formats as prometheus
 

@@ -5,7 +5,7 @@
 * Ensure best practices are used
 
 ## What is it
-This is a wrapper around [App.Metrics](https://www.app-metrics.io) that  is more suitable for our organisation: 
+* a wrapper around [App.Metrics](https://www.app-metrics.io). 
 * Autofac for dependency injection
 * can act as an extra layer in naming/managing metrics in your codebase
 * formats as prometheus
@@ -28,7 +28,7 @@ Inject:
 private readonly IIncrementMetricsCounters _metricsCounterIncrementer;
 ```
 
-Create a model:
+Create a model. This is were you might want to write some basic factories that handle things like setting the namespace or add some standard labels. Be sure to read the [best practices](https://prometheus.io/docs/practices/naming/)!
 
 ```csharp
 public class UserClickedSomethingMetric : IMetricsModel
@@ -39,7 +39,7 @@ public class UserClickedSomethingMetric : IMetricsModel
     }
 
     public string Namespace => "MyApplication";
-    public string ThingBeingMeasured => "findandreplace_clicked_find";
+    public string ThingBeingMeasured => "myfeature_clicked_somebutton";
     public string Unit => string.Empty;
     public string Suffix => "total";
     public Dictionary<string, string> Tags { get; }

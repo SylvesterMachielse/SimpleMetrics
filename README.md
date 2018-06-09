@@ -2,14 +2,15 @@
 # SimpleMetrics
 
 ## Goals
-* Start working with metrics easily
+* Start working with simple metrics 
 * Ensure best practices are used
 
 ## What is it
 * a wrapper around [App.Metrics](https://www.app-metrics.io). 
-* Autofac for dependency injection
+* uses Autofac for dependency injection
 * can act as an extra layer in naming/managing metrics in your codebase
 * formats as prometheus
+* currently only counters, gauges and apdex metrics are supported
 
 ## Configuration
 

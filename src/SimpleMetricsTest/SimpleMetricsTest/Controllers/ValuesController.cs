@@ -6,7 +6,6 @@ using SimpleMetrics.Contracts.Measuring;
 namespace SimpleMetricsTest.Controllers
 {
     [Route("api/[controller]")]
-    
     public class ValuesController : Controller
     {
         private readonly IIncrementMetricsCounters _metricsCounterIncrementer;
@@ -15,14 +14,14 @@ namespace SimpleMetricsTest.Controllers
         {
             _metricsCounterIncrementer = metricsCounterIncrementer;
         }
-        
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
             _metricsCounterIncrementer.Increment(new ValuesModel());
 
-            return new string[] { "value1", "value2" };
+            return new string[] {"value1", "value2"};
         }
 
         // GET api/values/5
@@ -34,13 +33,13 @@ namespace SimpleMetricsTest.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody] string value)
         {
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody] string value)
         {
         }
 
@@ -64,4 +63,6 @@ namespace SimpleMetricsTest.Controllers
         public string Suffix => "total";
         public Dictionary<string, string> Tags { get; }
     }
+
+  
 }

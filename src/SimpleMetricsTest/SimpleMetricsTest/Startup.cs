@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SimpleMetrics;
+using SimpleMetricsTest.Services;
 
 namespace SimpleMetricsTest
 {
@@ -26,6 +27,10 @@ namespace SimpleMetricsTest
         public void ConfigureContainer(ContainerBuilder builder)
         {
             builder.RegisterModule<MetricsModule>();
+            builder.RegisterType<FakeMetricIncrementer>().AsSelf().SingleInstance();
+            builder.RegisterType<FakeThingsBeingMeasuredProvider>().AsSelf().SingleInstance();
+            builder.RegisterType<FakeMetricModelProvider>().AsSelf().SingleInstance();
+            builder.RegisterType<TagProvider>().AsSelf().SingleInstance();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +41,7 @@ namespace SimpleMetricsTest
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseOwin();
             app.UseMvc();
         }
     }
